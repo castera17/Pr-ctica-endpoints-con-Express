@@ -1,7 +1,10 @@
 import express, { json } from "express";
 
+
 const app = express();
 const port = 3000;
+
+app.use(express.json());
 
 app.get('/', (req, res) => {
     res.send('Bienvenido a mi servidor');
@@ -25,6 +28,14 @@ app.get('/productos', (req, res) => {
 
 app.get('/materias', (req, res) => {
     res.json([{"nombre": "Matematica"},{"nombre": "Lengua"}])
+})
+
+
+const persona = [];
+
+app.post('/personas', (req, res) => {
+    const persona = req.body;
+    if (!persona) return res.status(400).json({ error: 'Faltan datos de la persona' });
 })
 
 app.listen(port, () => {
